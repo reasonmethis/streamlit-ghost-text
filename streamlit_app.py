@@ -33,20 +33,20 @@ def main():
         bracket_text = "" if is_first_run else " (check out the ghost text above)"
         status = st.status(f"Fake thinking{bracket_text}...")
         
-        time.sleep(1 if is_first_run else 4)
+        time.sleep(1 if is_first_run else 5)
         status.update(label="Done!", state="complete")
         
+        # NOTE: the line below constructs a silly reply based on the user message,
+        # but that doesn't matter for the purposes of showing the ghost text, we might 
+        # as well just have done: ai_msg = "SOME TEXT HERE"
         ai_msg = (
             "Hello, I am a fake chatbot that always agrees with you!"
             if is_first_run
-            else make_silly_reply(user_msg)
+            else make_silly_reply(user_msg) 
         ) + f"\n\n{make_silly_question()}"
         st.write(ai_msg)
 
     ss.chat_history.extend([user_msg, ai_msg])
-
-    # with st.expander("Expander"):
-    #     st.write("This is some text inside the expander.")
 
 
 if __name__ == "__main__":
